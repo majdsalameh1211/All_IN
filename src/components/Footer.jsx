@@ -19,7 +19,7 @@ const Footer = () => {
             >
               {/* Logo */}
               <img
-                src="public\logo.png"   // replace with your file path
+                src="\logo.png"   // replace with your file path
                 alt="Logo"
                 style={{
                   height: "3rem",       // SAME SIZE as your text (which is 3rem)
