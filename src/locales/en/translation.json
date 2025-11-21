@@ -1,0 +1,173 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "portfolio": "Portfolio",
+    "services": "Services",
+    "testimonials": "Testimonials",
+    "contact": "Contact"
+  },
+  "hero": {
+    "tagline": "In Real Estate, We Think Differently",
+    "subtitle": "Curated luxury homes with white-glove service",
+    "location": "Nof HaGalil, Israel",
+    "cta1": "Request Consultation",
+    "cta2": "View Portfolio",
+    "scroll": "Scroll to explore"
+  },
+  "about": {
+    "title": "About ALL IN",
+    "story1": "At ALL IN, real estate isn't just about property. It's about people, moments, and decisions that shape lives.",
+    "story2": "We built something different. Not a brokerage. Not an agency. But a space where people feel safe to think clearly — and choose boldly.",
+    "story3": "Every deal begins with a question: 'What do you really need right now?' And ends only when the answer feels deeply right — financially and emotionally.",
+    "teamTitle": "Meet Your Team",
+    "team": {
+      "fares": {
+        "name": "Fares Gabor",
+        "title": "Founder | Strategic Advisor & Asset Specialist",
+        "quote": "I'm not here to close fast. I'm here to make sure it feels right.",
+        "bio": "Fares is the heart of ALL IN's mindset. With years of experience, sharp emotional intelligence, and a calm energy that grounds clients — he ensures every deal feels human, not rushed."
+      },
+      "ward": {
+        "name": "Ward Gabor",
+        "title": "Operations Lead | Client Journey Manager",
+        "quote": "I don't show properties. I show up for people.",
+        "bio": "Ward is the structure, the rhythm, and the reassurance. He manages timelines, filters pressure, and makes sure every client moves through the process with clarity."
+      }
+    },
+    "approachTitle": "Our Approach",
+    "approach": {
+      "discretion": {
+        "title": "Discretion",
+        "desc": "Your privacy is our priority"
+      },
+      "expertise": {
+        "title": "Expertise",
+        "desc": "Deep market knowledge"
+      },
+      "dedication": {
+        "title": "Dedication",
+        "desc": "Committed to your success"
+      }
+    }
+  },
+  "portfolio": {
+    "title": "Featured Properties",
+    "filters": {
+      "all": "All",
+      "forSale": "For Sale",
+      "forRent": "For Rent",
+      "sold": "Sold"
+    },
+    "viewDetails": "View Details",
+    "badges": {
+      "new": "NEW",
+      "sold": "SOLD",
+      "exclusive": "EXCLUSIVE"
+    }
+  },
+  "services": {
+    "title": "Services & Expertise",
+    "subtitle": "Comprehensive solutions for every real estate need",
+    "items": {
+      "selling": {
+        "title": "Home Selling",
+        "desc": "Cinematic media production, strategic marketing, and expert negotiation"
+      },
+      "acquisition": {
+        "title": "Property Acquisition",
+        "desc": "Deep intake sessions, curated options, and personalized guidance"
+      },
+      "land": {
+        "title": "Land Investment",
+        "desc": "Future development potential with comprehensive due diligence"
+      },
+      "rentals": {
+        "title": "Luxury Rentals",
+        "desc": "Verified listings with transparent contracts and ongoing support"
+      },
+      "marketing": {
+        "title": "Property Marketing",
+        "desc": "Cinematic visuals and targeted campaigns that tell your story"
+      },
+      "consulting": {
+        "title": "Personal Consulting",
+        "desc": "One-on-one strategic sessions with honest, pressure-free advice"
+      }
+    },
+    "explore": "Explore"
+  },
+  "testimonials": {
+    "title": "Client Success",
+    "bigStat": "₪180M+",
+    "bigStatDesc": "in Property Value",
+    "stats": {
+      "transactions": "Transactions",
+      "satisfaction": "Satisfaction",
+      "rating": "Rating"
+    },
+    "quotes": [
+      {
+        "text": "They didn't just offer me options. They helped me figure out what I actually want.",
+        "author": "Daniel R.",
+        "location": "Nof HaGalil"
+      },
+      {
+        "text": "I wasn't sold to. I was seen. That changed everything.",
+        "author": "Haneen M.",
+        "location": "Nazareth"
+      },
+      {
+        "text": "ALL IN didn't just list my property. They turned it into a story buyers wanted to be part of.",
+        "author": "Sarah K.",
+        "location": "Haifa"
+      },
+      {
+        "text": "I never felt pushed. Just heard. And that made all the difference.",
+        "author": "Ahmed T.",
+        "location": "Yafia"
+      }
+    ]
+  },
+  "contact": {
+    "title": "Let's Start a Conversation",
+    "subtitle": "Ready to find your next home?",
+    "form": {
+      "name": "Full Name",
+      "email": "Email Address",
+      "phone": "Phone Number",
+      "interest": "I'm interested in",
+      "interestOptions": {
+        "buying": "Buying",
+        "selling": "Selling",
+        "renting": "Renting",
+        "land": "Land Investment",
+        "consulting": "Consulting"
+      },
+      "message": "Message",
+      "submit": "Send Message",
+      "success": "Message Sent Successfully!"
+    },
+    "info": {
+      "title": "Contact Information",
+      "address": "Nof HaGalil, Israel (Mol Harem Center)",
+      "phone": "04-6666599",
+      "email": "info@allinrealestate.net",
+      "hours": "Sunday - Friday | 09:00 - 18:00"
+    }
+  },
+  "footer": {
+    "tagline": "In Real Estate, We Don't Just Close Deals. We Craft Decisions You Can Live In.",
+    "links": {
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Use",
+      "cookies": "Cookie Policy"
+    },
+    "copyright": "© 2024 ALL IN Real Estate. All rights reserved.",
+    "social": {
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "linkedin": "LinkedIn"
+    }
+  }
+}
