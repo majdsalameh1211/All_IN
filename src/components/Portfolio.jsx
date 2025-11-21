@@ -9,10 +9,8 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import './Portfolio.css';
 
-
-
 const Portfolio = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation(); // ✅ Added i18n here
   
   const { ref, inView } = useInView({
     threshold: 0.2,
@@ -98,19 +96,29 @@ const Portfolio = () => {
     }
   ];
 
-// Filter properties by category
-let filteredProperties = allProperties.filter(
-  (p) => activeFilter === "all" || p.category === activeFilter
-);
+  // Filter properties by category
+  let filteredProperties = allProperties.filter(
+    (p) => activeFilter === "all" || p.category === activeFilter
+  );
 
-// 🔁 Force infinite loop by duplicating items when too few
-if (filteredProperties.length > 0) {
-  while (filteredProperties.length < 8) {
-    filteredProperties = [...filteredProperties, ...filteredProperties];
+  // 🔥 Force infinite loop by duplicating items when too few
+  // AND add unique keys for each duplicated item
+  if (filteredProperties.length > 0) {
+    const originalLength = filteredProperties.length;
+    let duplicateCount = 0;
+    
+    while (filteredProperties.length < 8) {
+      duplicateCount++;
+      // Add unique identifier to duplicated items
+      const duplicates = filteredProperties.slice(0, originalLength).map((prop) => ({
+        ...prop,
+        uniqueId: `${prop.id}-dup-${duplicateCount}` // ✅ Unique key for duplicates
+      }));
+      filteredProperties = [...filteredProperties, ...duplicates];
+    }
+    
+    filteredProperties = filteredProperties.slice(0, 8);
   }
-  filteredProperties = filteredProperties.slice(0, 8);
-}
-
 
   const filters = [
     { id: 'all', label: t('portfolio.filters.all') },
@@ -118,6 +126,9 @@ if (filteredProperties.length > 0) {
     { id: 'forRent', label: t('portfolio.filters.forRent') },
     { id: 'sold', label: t('portfolio.filters.sold') }
   ];
+
+  // ✅ Get current direction for Swiper
+  const isRTL = i18n.dir() === 'rtl';
 
   return (
     <section id="portfolio" className="portfolio-section">
@@ -162,7 +173,7 @@ if (filteredProperties.length > 0) {
           ))}
         </motion.div>
 
-        {/* Property Slideshow - Simple Slide Effect */}
+        {/* Property Slideshow */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
@@ -170,22 +181,25 @@ if (filteredProperties.length > 0) {
           className="portfolio-carousel"
         >
           <Swiper
-            key={activeFilter} // Reset carousel when filter changes
+            key={`${activeFilter}-${i18n.language}`} // ✅ Reset on filter OR language change
             modules={[Autoplay, Pagination, Navigation]}
+            dir={isRTL ? 'rtl' : 'ltr'} // ✅ Proper RTL support
             spaceBetween={30}
             slidesPerView={1}
             autoplay={{
-              delay: 5000, // 5 seconds per slide
+              delay: 5000,
               disableOnInteraction: false,
-              pauseOnMouseEnter: false
+              pauseOnMouseEnter: false,
+              reverseDirection: isRTL // ✅ Reverse autoplay in RTL
             }}
-            speed={800} // Smooth transition speed
+            speed={800}
             pagination={{
               clickable: true,
               bulletActiveClass: 'swiper-pagination-bullet-active-gold'
             }}
             navigation={true}
-            loop={true}
+            loop={filteredProperties.length > 0} // ✅ Only enable loop if we have items
+            loopAdditionalSlides={2} // ✅ Help with loop rendering
             breakpoints={{
               640: { 
                 slidesPerView: 2,
@@ -202,74 +216,79 @@ if (filteredProperties.length > 0) {
             }}
             className="properties-swiper"
           >
-            {filteredProperties.map((property) => (
-              <SwiperSlide key={property.id}>
-                <div
-                  className="property-card"
-                  onMouseEnter={() => setHoveredCard(property.id)}
-                  onMouseLeave={() => setHoveredCard(null)}
-                >
-                  {/* Image Container */}
-                  <div className="property-image-wrapper">
-                    <motion.img
-                      animate={{
-                        scale: hoveredCard === property.id ? 1.1 : 1
-                      }}
-                      transition={{ duration: 0.6 }}
-                      src={property.image}
-                      alt={property.title}
-                      className="property-image"
-                    />
-                    
-                    {/* Badge */}
-                    {property.badge && (
-                      <div className="property-badge">
-                        {t(`portfolio.badges.${property.badge.toLowerCase()}`)}
-                      </div>
-                    )}
-
-                    {/* Hover Overlay */}
-                    <AnimatePresence>
-                      {hoveredCard === property.id && (
-                        <motion.div
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          transition={{ duration: 0.3 }}
-                          className="property-overlay"
-                        >
-                          <button className="property-view-btn">
-                            {t('portfolio.viewDetails')}
-                          </button>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-
-                  {/* Property Info */}
-                  <motion.div
-                    animate={{
-                      y: hoveredCard === property.id ? -5 : 0
-                    }}
-                    transition={{ duration: 0.3 }}
-                    className="property-info"
+            {filteredProperties.map((property, index) => {
+              // ✅ Use uniqueId if it exists (for duplicates), otherwise use id
+              const slideKey = property.uniqueId || `${property.id}-${index}`;
+              
+              return (
+                <SwiperSlide key={slideKey}>
+                  <div
+                    className="property-card"
+                    onMouseEnter={() => setHoveredCard(slideKey)}
+                    onMouseLeave={() => setHoveredCard(null)}
                   >
-                    <h3 className="property-title">
-                      {property.title}
-                    </h3>
-                    <div className="property-location">
-                      <svg className="location-icon" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
-                      </svg>
-                      <span>{property.location}</span>
+                    {/* Image Container */}
+                    <div className="property-image-wrapper">
+                      <motion.img
+                        animate={{
+                          scale: hoveredCard === slideKey ? 1.1 : 1
+                        }}
+                        transition={{ duration: 0.6 }}
+                        src={property.image}
+                        alt={property.title}
+                        className="property-image"
+                      />
+                      
+                      {/* Badge */}
+                      {property.badge && (
+                        <div className="property-badge">
+                          {t(`portfolio.badges.${property.badge.toLowerCase()}`)}
+                        </div>
+                      )}
+
+                      {/* Hover Overlay */}
+                      <AnimatePresence>
+                        {hoveredCard === slideKey && (
+                          <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.3 }}
+                            className="property-overlay"
+                          >
+                            <button className="property-view-btn">
+                              {t('portfolio.viewDetails')}
+                            </button>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
                     </div>
-                    <p className="property-price">
-                      {property.price}
-                    </p>
-                  </motion.div>
-                </div>
-              </SwiperSlide>
-            ))}
+
+                    {/* Property Info */}
+                    <motion.div
+                      animate={{
+                        y: hoveredCard === slideKey ? -5 : 0
+                      }}
+                      transition={{ duration: 0.3 }}
+                      className="property-info"
+                    >
+                      <h3 className="property-title">
+                        {property.title}
+                      </h3>
+                      <div className="property-location">
+                        <svg className="location-icon" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                        </svg>
+                        <span>{property.location}</span>
+                      </div>
+                      <p className="property-price">
+                        {property.price}
+                      </p>
+                    </motion.div>
+                  </div>
+                </SwiperSlide>
+              );
+            })}
           </Swiper>
         </motion.div>
       </div>
