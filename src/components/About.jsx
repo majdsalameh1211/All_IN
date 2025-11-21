@@ -78,7 +78,7 @@ const About = () => {
               <div className="team-photo">
                 <img
                   src="/fares.jpg"
-                  alt="Fares Gabor"
+                  alt="Fares Jabor"
                   className="team-photo-image"
                 />
               </div>
@@ -117,7 +117,7 @@ const About = () => {
               <div className="team-photo">
                 <img
                   src="/ward.jpg"
-                  alt="Ward Gabor"
+                  alt="Ward Jabor"
                   className="team-photo-image"
                 />
               </div>
