@@ -1,14 +1,36 @@
+# Node dependencies
 node_modules/
+
+# Build output
 dist/
+
+# Lock file (ignored by your request)
+package-lock.json
+
+# Environment files
 .env
 .env.local
 .env.*.local
+
+# Certificates / Keys
 *.pem
+
+# OS-specific files
 .DS_Store
 Thumbs.db
+
+# Editor/IDE
 .vscode/
 .idea/
+
+# Swap/temporary files
 *.swp
 *.swo
 *~
 .cache/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*

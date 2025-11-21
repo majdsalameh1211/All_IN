@@ -79,7 +79,7 @@ const Hero = () => {
 
               {/* Logo on top */}
               <img
-                src="public\logo.png"   // <-- replace with your logo path
+                src="public/logo.png"   // <-- replace with your logo path
                 alt="Brand Logo"
                 style={{
                   height: "4rem",       // matches text height
